@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
 #family of model - RandomForestRegressor
@@ -27,14 +28,52 @@ plt.xlabel("Date (YYYY-MM-DD)")
 plt.ylabel("Prices(USD)")
 
 #sharp incline towards later dates
-plt.plot(df['Date'],df['Volume'])
-plt.xlabel('Date (YYYY-MM-DD)')
-plt.ylabel('Volume')
+#plt.plot(df['Date'],df['Volume'])
+#plt.xlabel('Date (YYYY-MM-DD)')
+#plt.ylabel('Volume')
+
 #print(df.shape)
-print(df.describe())
-print(df.corr(method='pearson'))
+#print(df.describe())
+#print(df.corr(method='pearson'))
+
 #using the pearson correaltion coefficient strong pos relation with Open
 #High,Low,Close and -ve correlation with Volume(Moderate)
+
+y = df['Adj Close']
+x = df[['Volume']]
+
+#split the data in 60% train and 40% test
+X_train,X_test,Y_train,Y_test = train_test_split(x,y,test_size=0.6,
+                                                 random_state=123)
+regressor = LinearRegression()
+regressor.fit(X_train,Y_train)
+
+Y_predict = regressor.predict(X_test)
+
+#compare prediction and test
+df = pd.DataFrame({'Actual': Y_test,"Predicted":Y_predict})
+#print(df)
+
+#evaluate performance of LinearRegression
+print(mean_squared_error(Y_test, Y_predict))
+print(r2_score(Y_test, Y_predict))
+
+#save LinearRegression Model
+joblib.dump(regressor,'Linregress.pkl')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
