@@ -51,10 +51,10 @@ regressor.fit(X_train,Y_train)
 
 Y_predict = regressor.predict(X_test)
 
-#compare prediction and test
+#plot-compare prediction and test
 df1 = pd.DataFrame({'Actual': Y_test,"Predicted":Y_predict})
-df1_plot = df.head(10)
-df1.plot(kind='bar',figsize=(16,10))
+df1_plot = df1.head(30)
+df1_plot.plot(kind='bar',figsize=(16,10))
 plt.show()
 
 #print(df)
