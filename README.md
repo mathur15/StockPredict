@@ -8,6 +8,5 @@ In this example I have chosen to analyze the Vanguard ETF.
 * Last value - Set the predicted value to the previously observed value 
 * Moving Averages- Set the predicted value to the mean of the previous N days. Need to tune for N
     * Optimal value was N=2 according to lowest mean squared error
-* Extreme Gradient Boosting
 * Long Short Term Memory
 
